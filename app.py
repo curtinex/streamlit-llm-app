@@ -41,7 +41,7 @@ def get_llm_response(user_input, expert_type):
     
     # LLMの初期化と実行
     llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)
-    result = llm(messages)
+    result = llm.invoke(messages)
     
     return result.content
 
