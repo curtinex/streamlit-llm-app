@@ -1,5 +1,6 @@
 import streamlit as st
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage, SystemMessage
 
 st.title("サンプルアプリ①: 簡単なWebアプリ")
 
