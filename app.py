@@ -3,8 +3,17 @@ import os
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
-from dotenv import load_dotenv
-load_dotenv()
+# StreamlitのSecretsまたは環境変数からAPIキーを取得
+try:
+    # Streamlit Cloud: st.secretsから取得
+    openai_api_key = st.secrets["OPENAI_API_KEY"]
+except:
+    # ローカル環境: 環境変数から取得
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+
+# APIキーを環境変数に設定
+if openai_api_key:
+    os.environ["OPENAI_API_KEY"] = openai_api_key
 
 # LLMからの回答を取得する関数
 def get_llm_response(user_input, expert_type):
