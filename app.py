@@ -51,28 +51,16 @@ st.markdown("""
 専門家のタイプを選択し、質問を入力するだけで、AIが専門的なアドバイスを提供します。
 
 ### 🔧 操作方法
-1. **サイドバー**でOpenAI APIキーを入力してください
-2. **専門家のタイプ**をラジオボタンで選択してください
-3. **質問内容**を入力フォームに記入してください
-4. **「回答を取得」ボタン**をクリックして、AIからの回答を受け取ってください
+1. **専門家のタイプ**をラジオボタンで選択してください
+2. **質問内容**を入力フォームに記入してください
+3. **「回答を取得」ボタン**をクリックして、AIからの回答を受け取ってください
 """)
 
 st.markdown("---")
 
-# サイドバーでAPIキーを入力
+# サイドバー
 with st.sidebar:
     st.header("⚙️ 設定")
-    openai_api_key = st.text_input(
-        "OpenAI APIキー", 
-        type="password",
-        help="OpenAIのAPIキーを入力してください"
-    )
-    
-    if openai_api_key:
-        st.success("✅ APIキーが設定されました")
-    else:
-        st.warning("⚠️ APIキーを入力してください")
-    
     st.markdown("---")
     st.markdown("### ℹ️ 情報")
     st.markdown("**使用モデル**: gpt-4o-mini")
@@ -111,14 +99,9 @@ user_input = st.text_area(
 # 回答取得ボタン
 if st.button("🚀 回答を取得", type="primary", use_container_width=True):
     # バリデーション
-    if not openai_api_key:
-        st.error("⚠️ サイドバーからOpenAI APIキーを入力してください。")
-    elif not user_input:
+    if not user_input:
         st.error("⚠️ 質問内容を入力してください。")
     else:
-        # APIキーを環境変数に設定
-        os.environ["OPENAI_API_KEY"] = openai_api_key
-        
         try:
             with st.spinner(f"{expert_type}が回答を考えています...🤔"):
                 # LLMから回答を取得
